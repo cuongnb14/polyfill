@@ -17,3 +17,14 @@ func Filter[T any](input []T, f func(T) bool) []T {
 	}
 	return result
 }
+
+func Find[T comparable](input []T, item T) int {
+	index := -1
+	for i, v := range input {
+		if v == item {
+			index = i
+			break
+		}
+	}
+	return index
+}

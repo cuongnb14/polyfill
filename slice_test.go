@@ -113,3 +113,28 @@ func TestFilter(t *testing.T) {
 		})
 	}
 }
+
+func TestFind(t *testing.T) {
+	tests := []struct {
+		name  string
+		input []int
+		item  int
+		want  int
+	}{
+		{"Empty slice", []int{}, 1, -1},
+		{"Item present at start", []int{1, 2, 3, 4, 5}, 1, 0},
+		{"Item present at middle", []int{1, 2, 3, 4, 5}, 3, 2},
+		{"Item present at end", []int{1, 2, 3, 4, 5}, 5, 4},
+		{"Item not present", []int{1, 2, 3, 4, 5}, 6, -1},
+		{"Negative item", []int{-1, -2, -3, -4, -5}, -3, 2},
+		{"Zero item", []int{-1, 0, 1}, 0, 1},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Find[int](tt.input, tt.item); got != tt.want {
+				t.Errorf("Find() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
